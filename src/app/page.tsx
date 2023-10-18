@@ -27,7 +27,7 @@ interface ApiResponse {
 const fetchData = async (): Promise<ApiResponse> => {
   // Perform the fetch request
   const response = await fetch(
-    "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo"
+    `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=${process.env.API_KEY}`
   );
   if (!response.ok) {
     // Handle the case where the request is not successful (e.g., network error)
@@ -42,7 +42,7 @@ const fetchData = async (): Promise<ApiResponse> => {
     return responseData as ApiResponse;
   } else {
     // Handle the case where the response structure does not match the interface
-    throw new Error("Response structure does not match expected format");
+    throw new Error("API Response structure does not match expected format");
   }
 };
 
